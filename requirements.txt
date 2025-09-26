@@ -1,0 +1,2 @@
+# framer-motion for animation
+framer-motion
