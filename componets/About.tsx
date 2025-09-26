@@ -83,7 +83,7 @@ export default function Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.2 }}
                 viewport={{ once: true }}
-                className="p-5 shadow-md rounded"
+                className="p-5 shadow-md rounded border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
               >
                 <p className="flex justify-center text-3xl text-red-500">{missionItem.icon}</p>
                 <h1 className="text-xl font-bold mt-2">{missionItem.title}</h1>

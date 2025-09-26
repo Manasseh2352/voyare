@@ -47,7 +47,7 @@ export default function Page() {
               {testimonies.map((testimony, index) => (
               <motion.div 
                 key={index} 
-                className="bg-gray-50 p-4 sm:p-6 rounded-lg text-center"
+                className="bg-gray-50 p-4 sm:p-6 rounded-lg text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}

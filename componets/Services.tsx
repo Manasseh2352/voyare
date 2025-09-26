@@ -50,7 +50,7 @@ export default function Page() {
               {services.map((service, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-white rounded-lg shadow-md text-center"
+                  className="bg-white rounded-lg shadow-md text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -61,7 +61,7 @@ export default function Page() {
                  alt={service.title} 
                  width={50} 
                  height={50} 
-                 className="bg-gray-300 w-full"/>
+                 className="bg-gray-300 w-full rounded"/>
                 <h3 className="text-lg mt-5 text-black sm:text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-600 text-sm sm:text-base">{service.text}</p>
                 </motion.div>

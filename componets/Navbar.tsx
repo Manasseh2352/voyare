@@ -1,23 +1,24 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
-const navLinks = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#services', label: 'Services' },
-  { href: '#vision', label: 'Vision' },
-  { href: '#testimonials', label: 'Testimonials' },
-  { href: '#contact', label: 'Contact' },
-];
-
-const Navbar = () => {
+export default function Navbar() {
+  const navLinks = [
+    { href: '#home', label: 'Home' },
+    { href: '#about', label: 'About' },
+    { href: '#services', label: 'Services' },
+    { href: '#vision', label: 'Vision' },
+    { href: '#testimonials', label: 'Testimonials' },
+    { href: '#contact', label: 'Contact' },
+  ];
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
+  const [scrolled, setScrolled] = useState(false);
 
   // Lock scroll when menu is open
-  React.useEffect(() => {
+  useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -26,139 +27,104 @@ const Navbar = () => {
     return () => { document.body.style.overflow = ''; };
   }, [open]);
 
-  return (
-    <nav style={{ background: '#fff', borderBottom: '1px solid #e5e7eb', padding: '0 32px', height: 72, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 100 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <img src="/globe.svg" alt="Logo" style={{ height: 32, width: 32 }} />
-        <span style={{ fontWeight: 700, fontSize: 22, color: '#232a36' }}>Voyare Travel</span>
-      </div>
-      {/* Desktop Nav */}
-      <ul
-        style={{
-          display: 'flex',
-          gap: 32,
-          listStyle: 'none',
-          margin: 0,
-          padding: 0,
-        }}
-        className="navbar-desktop"
-      >
-        {navLinks.map(link => (
-          <li key={link.href} className="navbar-link">
-            <a href={link.href} style={{ color: '#232a36', fontWeight: 500, textDecoration: 'none', fontSize: 16 }}>{link.label}</a>
-          </li>
-        ))}
-      </ul>
-      {/* Hamburger Icon (mobile only) */}
-      <button
-        aria-label="Open menu"
-        onClick={() => setOpen(true)}
-        style={{
-          display: 'none',
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          zIndex: 102,
-        }}
-        className="navbar-hamburger"
-      >
-        <span style={{ display: 'block', width: 28, height: 3, background: '#232a36', margin: '6px 0', borderRadius: 2 }}></span>
-        <span style={{ display: 'block', width: 28, height: 3, background: '#232a36', margin: '6px 0', borderRadius: 2 }}></span>
-        <span style={{ display: 'block', width: 28, height: 3, background: '#232a36', margin: '6px 0', borderRadius: 2 }}></span>
-      </button>
-      {/* Overlay and Side Drawer */}
-      <AnimatePresence>
-        {open && (
-          <>
-            {/* Overlay */}
-            <motion.div
-              key="overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => setOpen(false)}
-              style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                background: 'rgba(0,0,0,0.3)',
-                zIndex: 101,
-              }}
-            />
-            {/* Drawer slides in from right */}
-            <motion.div
-              key="drawer"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'tween', duration: 0.3 }}
-              style={{
-                position: 'fixed',
-                top: 0,
-                right: 0,
-                height: '100vh',
-                width: 260,
-                background: '#fff',
-                boxShadow: '-2px 0 16px rgba(0,0,0,0.08)',
-                zIndex: 102,
-                padding: '32px 24px',
-                display: 'flex',
-                flexDirection: 'column',
-              }}
-            >
-              <button
-                aria-label="Close menu"
-                onClick={() => setOpen(false)}
-                style={{
-                  alignSelf: 'flex-end',
-                  background: 'none',
-                  border: 'none',
-                  fontSize: 28,
-                  color: '#232a36',
-                  marginBottom: 32,
-                  cursor: 'pointer',
-                }}
-              >
-                &times;
-              </button>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 24 }}>
-                {navLinks.map(link => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
-                      style={{ color: '#232a36', fontWeight: 500, textDecoration: 'none', fontSize: 20 }}
-                      onClick={() => setOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-      {/* Responsive styles */}
-      <style>{`
-        @media (max-width: 900px) {
-          .navbar-desktop {
-            display: none !important;
-          }
-          .navbar-hamburger {
-            display: block !important;
+  // Highlight active link on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+      const scrollPos = window.scrollY + 120;
+      for (let i = 0; i < navLinks.length; i++) {
+        const section = document.querySelector(navLinks[i].href) as HTMLElement | null;
+        if (section) {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (top <= scrollPos && top + height > scrollPos) {
+            setActive(navLinks[i].href);
+            return;
           }
         }
-        @media (min-width: 901px) {
-          .navbar-hamburger {
-            display: none !important;
-          }
-        }
-      `}</style>
-    </nav>
-  );
-};
+      }
+      setActive('');
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-export default Navbar;
+  return (
+      <nav className={`backdrop-blur bg-white/80 border-b mx-20 top-10 rounded-full border-gray-200 px-8 h-18 flex items-center justify-between sticky top-0 z-50 transition-shadow ${scrolled ? 'shadow-md' : ''}`}>
+        <div className="flex items-center gap-4">
+          <img src="/globe.svg" alt="Logo" className="h-8 w-8" />
+          <span className="font-bold text-xl text-gray-900">Voyare Travel</span>
+        </div>
+        {/* Desktop Nav */}
+        <ul className="hidden md:flex gap-8 list-none m-0 p-0">
+          {navLinks.map(link => (
+            <li key={link.href} className="navbar-link">
+              <a
+                href={link.href}
+                className={`font-medium text-base transition-colors duration-200 px-2 py-1 rounded ${active === link.href ? 'text-blue-600 bg-blue-50' : 'text-gray-900 hover:text-blue-600'}`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        {/* Hamburger Icon (mobile only) */}
+        <button
+          aria-label="Open menu"
+          onClick={() => setOpen(!open)}
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 bg-transparent border-none cursor-pointer z-50 relative"
+        >
+          <span className={`block w-7 h-1 bg-gray-900 my-1 rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span className={`block w-7 h-1 bg-gray-900 my-1 rounded transition-all duration-300 ${open ? 'opacity-0' : ''}`}></span>
+          <span className={`block w-7 h-1 bg-gray-900 my-1 rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`}></span>
+        </button>
+        {/* Overlay and Side Drawer */}
+        <AnimatePresence>
+          {open && (
+            <>
+              {/* Overlay */}
+              <motion.div
+                key="overlay"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setOpen(false)}
+                className="fixed inset-0 bg-black bg-opacity-30 z-40"
+              />
+              {/* Drawer slides in from right */}
+              <motion.div
+                key="drawer"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'tween', duration: 0.3 }}
+                className="fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-50 flex flex-col p-8"
+              >
+                <button
+                  aria-label="Close menu"
+                  onClick={() => setOpen(false)}
+                  className="self-end text-3xl text-gray-900 mb-8 bg-transparent border-none cursor-pointer"
+                >
+                  &times;
+                </button>
+                <ul className="flex flex-col gap-6">
+                  {navLinks.map(link => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        className={`font-medium text-lg transition-colors duration-200 px-2 py-1 rounded ${active === link.href ? 'text-blue-600 bg-blue-50' : 'text-gray-900 hover:text-blue-600'}`}
+                        onClick={() => setOpen(false)}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </nav>
+  );
+}
