@@ -28,10 +28,10 @@ const testimonies = [
 export default function Page() {
     return (
         <>
-        <section id='testimonials' className="py-12 sm:py-16 lg:py-20 bg-white">
+  <section id='testimonials' className="py-12 sm:py-16 lg:py-20 ">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2 
-              className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8 sm:mb-12"
+              className="text-2xl sm:text-3xl font-bold  text-center mb-8 sm:mb-12"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -47,7 +47,7 @@ export default function Page() {
               {testimonies.map((testimony, index) => (
               <motion.div 
                 key={index} 
-                className="bg-gray-50 p-4 sm:p-6 rounded-lg text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
+                className=" p-4 sm:p-6 rounded-lg text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -63,7 +63,7 @@ export default function Page() {
                  className="h-20 w-20 rounded-full"
                  />
                  <div>
-                  <h4 className="font-semibold text-black text-sm sm:text-base">{testimony.name}</h4>
+                  <h4 className="font-semibold text-sm sm:text-base">{testimony.name}</h4>
                   <p className="text-gray-600 mb-3 sm:mb-4 italic text-sm sm:text-base">{testimony.job}</p>
                  </div>
                  </div>

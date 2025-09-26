@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 
+
 export default function Contact() {
   return (
-    <section id='contact' className=" py-16 md:py-24">
-      <div className="max-w-6xl mx-auto text-center shadow-md border-2 border-gray-200 rounded py-5 px-4 md:px-8">
+    <section id='contact' className="py-16 md:py-24 ">
+      <div className="max-w-6xl mx-auto text-center shadow-md border-2 border-gray-200 rounded py-5 px-4 md:px-8 ">
         {/* Left: Contact Info */}
         <motion.div
           className=""
@@ -14,7 +15,7 @@ export default function Contact() {
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-2xl font-semibold mb-4 text-gray-900 ">Get In Touch</h2>
+          <h2 className="text-4xl md:text-2xl font-semibold mb-4">Get In Touch</h2>
           <p className="text-lg md:text-xl text-gray-500 mb-10 leading-snug">
             Ready to start your next adventure? Contact our travel experts today.
           </p>

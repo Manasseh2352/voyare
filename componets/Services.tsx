@@ -30,16 +30,16 @@ const services = [
 export default function Page() {
     return (
         <>
-        <section id="services" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
+  <section id="services" className="py-12 sm:py-16 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.h2 
-              className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8 sm:mb-12"
+              className="text-2xl sm:text-3xl font-bold  text-center mb-8 sm:mb-12"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >Our Services</motion.h2>
-            <p className="text-base sm:text-lg text-gray-600"></p>
+            <p className="text-base sm:text-lg "></p>
             <motion.div 
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -50,7 +50,7 @@ export default function Page() {
               {services.map((service, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-white rounded-lg shadow-md text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
+                  className=" rounded-lg shadow-md text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -62,7 +62,7 @@ export default function Page() {
                  width={50} 
                  height={50} 
                  className="bg-gray-300 w-full rounded"/>
-                <h3 className="text-lg mt-5 text-black sm:text-xl font-semibold mb-2">{service.title}</h3>
+                <h3 className="text-lg mt-5 sm:text-xl font-semibold mb-2">{service.title}</h3>
                 <p className="text-gray-600 text-sm sm:text-base">{service.text}</p>
                 </motion.div>
               ))}

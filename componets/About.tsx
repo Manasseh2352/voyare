@@ -28,7 +28,7 @@ const mission = [
 export default function Page() {
     return (
         <>
-        <section id="about" className="py-12 md:h-screen sm:py-16 lg:py-20 bg-white">
+  <section id="about" className="py-12 md:h-screen sm:py-16 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ export default function Page() {
               viewport={{ once: true }}
               className="lg:w-1/2 order-2 lg:order-1"
             >
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
+              <h2 className={`text-2xl sm:text-3xl font-bold  mb-4`}>Our Mission</h2>
               <p className="text-base sm:text-lg text-gray-600">At VOYARE,we evaluate every journey from airport to arival,
                 from getaway to grand escape delivering personalized, descreet, and luxurious experiences that redefines 
                 what it means to move.
@@ -74,7 +74,7 @@ export default function Page() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-7xl text-black text-center mt-10 mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 items-center gap-8 sm:gap-12"
+            className="max-w-7xl text-center mt-10 mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 items-center gap-8 sm:gap-12"
           >
              {mission.map((missionItem, index) => (
               <motion.div 

@@ -8,7 +8,7 @@ export default function Page() {
   return (
         <>
              
-        <section id="home" className="text-black py-12 md:h-screen sm:py-16 lg:py-20">
+  <section id="home" className="py-12 md:h-screen sm:py-16 lg:py-20">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -1,9 +1,12 @@
 'use client';
 
+
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
+import { useTheme } from './ThemeContext';
 
 export default function Navbar() {
+  const { theme, toggleTheme } = useTheme();
   const navLinks = [
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
@@ -49,16 +52,23 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`backdrop-blur blur-2xl bg-white text-black border border-gray-800 px-4 py-2 md:px-8 md:py-5
-      flex items-center justify-between  sticky top-5 transition-shadow w-full mt-0 rounded-full
+      className={`backdrop-blur border px-4 py-2 md:px-8 md:py-3 flex items-center justify-between sticky top-5 transition-shadow w-full mt-0 rounded-full
       ${scrolled ? 'shadow-lg' : 'shadow'}
       ${open ? 'rounded-none' : 'rounded-2xl'}
-      z-50 max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto`}
+      z-50 max-w-2xl md:max-w-3xl lg:max-w-7xl mx-auto
+      ${theme === 'dark' ? 'bg-gray-900 text-white border-gray-200' : 'bg-white text-black border-gray-800'}`}
     >
-      {/* Logo */}
+      {/* Logo, Theme Toggle, and Title */}
       <div className="flex items-center gap-3 md:gap-4">
         <img src="/globe.svg" alt="Logo" className="h-8 w-8" />
-        <span className="font-bold text-lg md:text-xl text-black">Voyare</span>
+        <span className="font-bold text-lg md:text-xl">Voyare</span>
+        <button
+          onClick={toggleTheme}
+          className="ml-4 px-3 py-1 rounded-full border border-gray-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
+        </button>
       </div>
 
       {/* Desktop Nav */}
@@ -68,7 +78,7 @@ export default function Navbar() {
             <a
               href={link.href}
               className={`font-medium text-base transition-colors duration-200 px-4 py-2 rounded-lg 
-              ${active === link.href ? 'bg-white/10 text-black' : 'text-gray-500 hover:bg-white/5'}`}
+              ${active === link.href ? 'bg-white/10 ' : 'text-gray-500 hover:bg-white/5'}`}
             >
               {link.label}
             </a>
