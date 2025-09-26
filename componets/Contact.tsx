@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Contact() {
   return (
-    <section className=" py-16 md:py-24">
+    <section id='contact' className=" py-16 md:py-24">
       <div className="max-w-6xl mx-auto text-center shadow-md border-2 border-gray-200 rounded py-5 px-4 md:px-8">
         {/* Left: Contact Info */}
         <motion.div
@@ -18,7 +18,7 @@ export default function Contact() {
           <p className="text-lg md:text-xl text-gray-500 mb-10 leading-snug">
             Ready to start your next adventure? Contact our travel experts today.
           </p>
-          <div className="flex justify-center place-items-center gap-8">
+          <div className="flex flex-col md:flex-row justify-center place-items-center gap-8">
             {/* Phone */}
             <div className="flex items-center gap-5">
               <div className="bg-gray-200 rounded-xl w-14 h-14 flex items-center justify-center">

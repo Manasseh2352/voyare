@@ -19,7 +19,7 @@ const Tick = [
 
 export default function Page() {
     return (
-        <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <section id='vision' className="py-12 sm:py-16 lg:py-20 bg-white">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
