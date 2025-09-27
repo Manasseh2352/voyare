@@ -6,22 +6,22 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    img:'/img (5).jfif',
+    img:'/booking.jpg',
     title:'Flight Booking',
     text:'Compare and book flights from major airlines worldwide'
   },
   {
-    img:'/img (4).jfif',
+    img:'/hotel.jpg',
     title:'Hotel Reservations',
     text:'Find and book accommodations that suit your budget and style'
   },
   {
-    img:'/rental.jfif',
+    img:'/rental.jpg',
     title:'Car Rentals',
     text:'Find and rent cars that suit your budget and style'
   },
   {
-    img:'/img (2).jfif',
+    img:'/insurance.jpg',
     title:'Travel Insurance',
     text:'Comprehensive coverage to protect your travel investment'
   },

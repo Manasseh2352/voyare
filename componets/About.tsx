@@ -59,7 +59,7 @@ export default function Page() {
             >
                {/* Placeholder image */}
                <Image
-               src={'/img (1).jfif'}
+               src={'/mission.jpg'}
                width={800}
                height={800}
                alt="Vision Image"
