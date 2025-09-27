@@ -51,51 +51,58 @@ export default function Navbar() {
   }, []);
 
   return (
+
     <nav
-      className={`backdrop-blur border px-4 py-2 md:px-8 md:py-3 flex items-center justify-between sticky top-5 transition-shadow w-full mt-0 rounded-full
-      ${scrolled ? 'shadow-lg' : 'shadow'}
-      ${open ? 'rounded-none' : 'rounded-2xl'}
-      z-50 max-w-2xl md:max-w-3xl lg:max-w-7xl mx-auto
-      ${theme === 'dark' ? 'bg-gray-900 text-white border-gray-200' : 'bg-white text-black border-gray-800'}`}
+  className={`backdrop-blur-lg bg-white/70 dark:bg-gray-900/70 border px-4 py-2 md:px-8 md:py-3 fixed top-5 left-1/2 transform -translate-x-1/2 transition-shadow mt-0 rounded-full
+  ${scrolled ? 'shadow-lg' : 'shadow'}
+  ${open ? 'rounded-none' : 'rounded-2xl'}
+  z-50 max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl
+  flex items-center justify-between
+  ${theme === 'dark' ? 'text-white border-gray-200' : 'text-black border-gray-800'}`}
     >
-      {/* Logo, Theme Toggle, and Title */}
-      <div className="flex items-center gap-3 md:gap-4">
-        <img src="/globe.svg" alt="Logo" className="h-8 w-8" />
-        <span className="font-bold text-lg md:text-xl">Voyare</span>
-        <button
-          onClick={toggleTheme}
-          className="ml-4 px-3 py-1 rounded-full border border-gray-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? '🌙 Dark' : '☀️ Light'}
-        </button>
+      <div className="flex w-full items-center justify-between">
+        {/* Left: Logo & Title */}
+        <div className="flex items-center gap-3 md:gap-4 min-w-[120px]">
+          <img src="/globe.svg" alt="Logo" className="h-8 w-8" />
+          <span className="font-bold text-lg md:text-xl">Voyare</span>
+        </div>
+
+        {/* Center: Nav Links (desktop) */}
+        <ul className="hidden md:flex gap-6 flex-1 justify-center">
+          {navLinks.map(link => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className={`font-medium text-base transition-colors duration-200 px-4 py-2 rounded-lg 
+                ${active === link.href ? 'bg-white/10 text-white font-bold' : 'text-gray-500 hover:bg-white/5'}`}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* Right: Theme Toggle & Hamburger */}
+        <div className="flex items-center gap-2 md:gap-4 min-w-[60px] justify-end">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-full border border-gray-400 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors flex items-center justify-center"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <span className="text-xl">🌙</span> : <span className="text-xl">☀️</span>}
+          </button>
+          {/* Hamburger (mobile only) */}
+          <button
+            aria-label="Toggle menu"
+            onClick={() => setOpen(!open)}
+            className="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-[60]"
+          >
+            <span className={`block w-7 h-1 bg-black rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : 'my-1'}`} />
+            <span className={`block w-7 h-1 bg-black rounded transition-all duration-300 ${open ? 'opacity-0' : 'my-1'}`} />
+            <span className={`block w-7 h-1 bg-black rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : 'my-1'}`} />
+          </button>
+        </div>
       </div>
-
-      {/* Desktop Nav */}
-      <ul className="hidden md:flex gap-6">
-        {navLinks.map(link => (
-          <li key={link.href}>
-            <a
-              href={link.href}
-              className={`font-medium text-base transition-colors duration-200 px-4 py-2 rounded-lg 
-              ${active === link.href ? 'bg-white/10 ' : 'text-gray-500 hover:bg-white/5'}`}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Hamburger (mobile only) */}
-      <button
-        aria-label="Toggle menu"
-        onClick={() => setOpen(!open)}
-        className="md:hidden flex flex-col justify-center items-center w-10 h-10 relative z-[60]"
-      >
-        <span className={`block w-7 h-1 bg-black rounded transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : 'my-1'}`} />
-        <span className={`block w-7 h-1 bg-black rounded transition-all duration-300 ${open ? 'opacity-0' : 'my-1'}`} />
-        <span className={`block w-7 h-1 bg-black rounded transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : 'my-1'}`} />
-      </button>
 
       {/* Overlay + Drawer */}
       <AnimatePresence>
