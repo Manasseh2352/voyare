@@ -45,12 +45,12 @@ export default function Page() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8"
+              className="grid grid-cols-1 md:grid-cols-2  gap-6 sm:gap-8"
             >
               {services.map((service, index) => (
                 <motion.div 
                   key={index} 
-                  className=" rounded-lg shadow-md text-center border-2 border-gray-200 hover:scale-105 transition-transform duration-300"
+                  className=" rounded-lg shadow-md md:flex-row gap-3 place-items-center text-center border-2 flex border-gray-200 hover:scale-105 transition-transform duration-300"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
@@ -61,9 +61,11 @@ export default function Page() {
                  alt={service.title} 
                  width={50} 
                  height={50} 
-                 className="bg-gray-300 w-full rounded"/>
-                <h3 className="text-lg mt-5 sm:text-xl font-semibold mb-2">{service.title}</h3>
-                <p className="text-gray-600 text-sm sm:text-base">{service.text}</p>
+                 className="bg-gray-300 w-80 rounded"/>
+                <div className="">
+                  <h3 className="text-lg mt-5 sm:text-xl font-semibold mb-2">{service.title}</h3>
+                  <p className="text-gray-600 text-sm sm:text-base">{service.text}</p>
+                </div>
                 </motion.div>
               ))}
             </motion.div>
